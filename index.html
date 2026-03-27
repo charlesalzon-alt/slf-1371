@@ -371,11 +371,11 @@
                 <div class="config-grid">
                     <div class="field">
                         <label for="webhookSoft">Webhook URL — Soft Signal (Act 2)</label>
-                        <input type="url" id="webhookSoft" value="https://pricehubble.activepieces.com/api/v1/webhooks/Pvk1HHOSIql9SOxPp3WR2/sync/sync">
+                        <input type="url" id="webhookSoft" value="https://pricehubble.activepieces.com/api/v1/webhooks/Pvk1HHOSIql9SOxPp3WR2/sync">
                     </div>
                     <div class="field">
                         <label for="webhookHard">Webhook URL — Hard Signal (Act 3)</label>
-                        <input type="url" id="webhookHard" value="https://pricehubble.activepieces.com/api/v1/webhooks/fHTx4YlBhVtkTi7coD8TP/sync/sync">
+                        <input type="url" id="webhookHard" value="https://pricehubble.activepieces.com/api/v1/webhooks/fHTx4YlBhVtkTi7coD8TP/sync">
                     </div>
                     <div class="field">
                         <label for="agent_phone_number_id">ElevenLabs Agent Phone Number ID <span class="var-hint">(for outbound calls)</span></label>
@@ -440,8 +440,8 @@
             company_name: 'Your mortgage company',
             agent_id: 'agent_3401kmqy3rbqff3v7vd6cbjsrqft',
             agent_phone_number_id: '',
-            webhookSoft: 'https://pricehubble.activepieces.com/api/v1/webhooks/Pvk1HHOSIql9SOxPp3WR2/sync/sync',
-            webhookHard: 'https://pricehubble.activepieces.com/api/v1/webhooks/fHTx4YlBhVtkTi7coD8TP/sync/sync',
+            webhookSoft: 'https://pricehubble.activepieces.com/api/v1/webhooks/Pvk1HHOSIql9SOxPp3WR2/sync',
+            webhookHard: 'https://pricehubble.activepieces.com/api/v1/webhooks/fHTx4YlBhVtkTi7coD8TP/sync',
         };
 
         // --- Config persistence ---
@@ -597,26 +597,37 @@
 
         async function fireWebhook(url, payload) {
             log(`POST → ${url.replace(/webhooks\/.*/, 'webhooks/...')}`, 'info');
-            log(`Payload: ${JSON.stringify(payload).substring(0, 120)}...`, 'info');
+            const jsonBody = JSON.stringify(payload);
+            log(`Payload: ${jsonBody.substring(0, 120)}...`, 'info');
 
+            // Strategy: try application/json first (needs CORS preflight).
+            // If blocked, retry with text/plain (simple request — no preflight,
+            // but response may be opaque). ActivePieces parses JSON from body
+            // regardless of Content-Type on webhook endpoints.
             try {
                 const resp = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
+                    body: jsonBody,
                 });
                 let body = null;
                 try { body = await resp.json(); } catch (_) {}
                 return { status: resp.status, body, ok: resp.ok, mode: 'cors' };
             } catch (corsErr) {
-                log(`CORS blocked — retrying with no-cors mode`, 'warn');
-                await fetch(url, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(payload),
-                });
-                return { status: 0, body: null, ok: true, mode: 'no-cors' };
+                log(`CORS preflight blocked — sending as text/plain (no preflight)`, 'warn');
+                try {
+                    const resp = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: jsonBody,
+                    });
+                    let body = null;
+                    try { body = await resp.json(); } catch (_) {}
+                    return { status: resp.status, body, ok: resp.ok, mode: 'text-plain' };
+                } catch (corsErr2) {
+                    log(`Response blocked by CORS but request was sent — webhook triggered`, 'warn');
+                    return { status: 0, body: null, ok: true, mode: 'opaque' };
+                }
             }
         }
 
