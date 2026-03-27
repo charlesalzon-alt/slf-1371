@@ -42,8 +42,8 @@ Act 3: Hard Signal (operator fires from this UI)
 
 | Field | Description |
 |---|---|
-| Webhook URL — Soft Signal | `https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF` |
-| Webhook URL — Hard Signal | `https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD` |
+| Webhook URL — Soft Signal | `https://pricehubble.activepieces.com/api/v1/webhooks/Pvk1HHOSIql9SOxPp3WR2/sync` |
+| Webhook URL — Hard Signal | `https://pricehubble.activepieces.com/api/v1/webhooks/fHTx4YlBhVtkTi7coD8TP/sync` |
 | LAD API Bearer Token | Auth token for `api-predev.pricehubble.net` |
 | LAD Events API URL | `https://api-predev.pricehubble.net/api/v1/leads/events` |
 
