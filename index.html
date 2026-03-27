@@ -260,20 +260,24 @@
             <div class="section-divider">Contact details sent to ActivePieces</div>
             <div class="lead-grid">
                 <div class="field">
-                    <label for="customer_first_name">First Name <span class="var-hint">→ customer_first_name</span></label>
-                    <input type="text" id="customer_first_name" placeholder="e.g. Chris">
+                    <label for="firstName">First Name <span class="var-hint">→ firstName</span></label>
+                    <input type="text" id="firstName" value="Charles" placeholder="e.g. Charles">
                 </div>
                 <div class="field">
-                    <label for="phone_number">Phone Number <span class="var-hint">→ phone_number</span></label>
-                    <input type="tel" id="phone_number" placeholder="e.g. +1 555 123 4567">
+                    <label for="lastName">Last Name <span class="var-hint">→ lastName</span></label>
+                    <input type="text" id="lastName" placeholder="e.g. Alzon">
+                </div>
+                <div class="field">
+                    <label for="phone_number">Phone Number <span class="var-hint">→ phone_number + client.phone</span></label>
+                    <input type="tel" id="phone_number" value="+33668706066" placeholder="e.g. +33668706066">
                 </div>
                 <div class="field">
                     <label for="email">Email <span class="var-hint">→ email</span></label>
-                    <input type="email" id="email" placeholder="e.g. chris@example.com">
+                    <input type="email" id="email" value="charles.alzon@pricehubble.com" placeholder="e.g. charles@example.com">
                 </div>
-                <div class="field">
+                <div class="field" style="grid-column: 1 / -1">
                     <label for="property_address">Property Address <span class="var-hint">→ property_address</span></label>
-                    <input type="text" id="property_address" placeholder="e.g. 742 Evergreen Terrace, Springfield">
+                    <input type="text" id="property_address" value="169 Madison Ave #2484, New York, NY 10016, United States" placeholder="e.g. 169 Madison Ave, New York">
                 </div>
             </div>
 
@@ -284,7 +288,7 @@
                     <input type="text" id="advisor_name" value="Jasser Kassab" placeholder="e.g. Jasser Kassab">
                 </div>
                 <div class="field">
-                    <label for="company_name">Company Name <span class="var-hint">→ company_name</span></label>
+                    <label for="company_name">Company / Brand <span class="var-hint">→ company_name + brand_name</span></label>
                     <input type="text" id="company_name" value="Your mortgage company" placeholder="e.g. Your mortgage company">
                 </div>
                 <div class="field">
@@ -367,11 +371,15 @@
                 <div class="config-grid">
                     <div class="field">
                         <label for="webhookSoft">Webhook URL — Soft Signal (Act 2)</label>
-                        <input type="url" id="webhookSoft" value="https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF">
+                        <input type="url" id="webhookSoft" value="https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF/sync">
                     </div>
                     <div class="field">
                         <label for="webhookHard">Webhook URL — Hard Signal (Act 3)</label>
-                        <input type="url" id="webhookHard" value="https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD">
+                        <input type="url" id="webhookHard" value="https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD/sync">
+                    </div>
+                    <div class="field">
+                        <label for="agent_phone_number_id">ElevenLabs Agent Phone Number ID <span class="var-hint">(for outbound calls)</span></label>
+                        <input type="text" id="agent_phone_number_id" placeholder="From ElevenLabs phone numbers config">
                     </div>
                 </div>
                 <div class="config-actions">
@@ -393,13 +401,15 @@
         const $ = id => document.getElementById(id);
 
         const els = {
-            customer_first_name: $('customer_first_name'),
+            firstName: $('firstName'),
+            lastName: $('lastName'),
             phone_number: $('phone_number'),
             email: $('email'),
             property_address: $('property_address'),
             advisor_name: $('advisor_name'),
             company_name: $('company_name'),
             agent_id: $('agent_id'),
+            agent_phone_number_id: $('agent_phone_number_id'),
             webhookSoft: $('webhookSoft'),
             webhookHard: $('webhookHard'),
             softTrigger: $('softTrigger'),
@@ -421,18 +431,24 @@
         };
 
         const DEFAULTS = {
-            webhookSoft: 'https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF',
-            webhookHard: 'https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD',
+            firstName: 'Charles',
+            lastName: '',
+            phone_number: '+33668706066',
+            email: 'charles.alzon@pricehubble.com',
+            property_address: '169 Madison Ave #2484, New York, NY 10016, United States',
             advisor_name: 'Jasser Kassab',
             company_name: 'Your mortgage company',
             agent_id: 'agent_3401kmqy3rbqff3v7vd6cbjsrqft',
+            agent_phone_number_id: '',
+            webhookSoft: 'https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF/sync',
+            webhookHard: 'https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD/sync',
         };
 
         // --- Config persistence ---
 
         const PERSIST_FIELDS = [
-            'customer_first_name', 'phone_number', 'email', 'property_address',
-            'advisor_name', 'company_name', 'agent_id',
+            'firstName', 'lastName', 'phone_number', 'email', 'property_address',
+            'advisor_name', 'company_name', 'agent_id', 'agent_phone_number_id',
             'webhookSoft', 'webhookHard',
         ];
 
@@ -506,39 +522,68 @@
             stepsEl.querySelectorAll('li').forEach(li => li.classList.remove('done'));
         }
 
-        // --- Payload builders (keys match ElevenLabs agent dynamic variables) ---
+        // --- Payload builders (keys match ActivePieces flow references) ---
+
+        function v(el, fallback) { return (el && el.value) || fallback || ''; }
 
         function buildSoftPayload() {
+            const firstName = v(els.firstName, DEFAULTS.firstName);
+            const lastName = v(els.lastName, DEFAULTS.lastName);
+            const phone = v(els.phone_number, DEFAULTS.phone_number);
+            const addr = v(els.property_address, DEFAULTS.property_address);
             return {
                 signal_type: 'valuation_increase',
-                customer_first_name: els.customer_first_name.value || 'Chris',
-                phone_number: els.phone_number.value || '+1 555 000 0000',
-                email: els.email.value || 'demo@example.com',
-                property_address: els.property_address.value || '742 Evergreen Terrace, Springfield',
-                advisor_name: els.advisor_name.value || DEFAULTS.advisor_name,
-                company_name: els.company_name.value || DEFAULTS.company_name,
+                firstName: firstName,
+                lastName: lastName,
+                customer_first_name: firstName,
+                phone_number: phone,
+                email: v(els.email, DEFAULTS.email),
+                property_address: addr,
+                advisor_name: v(els.advisor_name, DEFAULTS.advisor_name),
+                company_name: v(els.company_name, DEFAULTS.company_name),
+                brand_name: v(els.company_name, DEFAULTS.company_name),
+                client: { phone: phone },
                 details: {
                     change_percent: 10,
-                    title: 'Property valuation increased +10%',
-                    description: `Great news! The estimated value of the property at ${els.property_address.value || '742 Evergreen Terrace'} has increased by 10%. A mortgage advisor can help you understand what this means for your financing options.`,
+                    title: 'Property value has strongly increased',
+                    description: `This property value experienced a +10% increase, opening a window for refinancing`,
                 },
             };
         }
 
         function buildHardPayload() {
+            const firstName = v(els.firstName, DEFAULTS.firstName);
+            const lastName = v(els.lastName, DEFAULTS.lastName);
+            const phone = v(els.phone_number, DEFAULTS.phone_number);
+            const addr = v(els.property_address, DEFAULTS.property_address);
+            const advisorName = v(els.advisor_name, DEFAULTS.advisor_name);
+            const brandName = v(els.company_name, DEFAULTS.company_name);
             return {
                 signal_type: 'listing_detected',
-                customer_first_name: els.customer_first_name.value || 'Chris',
-                phone_number: els.phone_number.value || '+1 555 000 0000',
-                email: els.email.value || 'demo@example.com',
-                property_address: els.property_address.value || '742 Evergreen Terrace, Springfield',
-                advisor_name: els.advisor_name.value || DEFAULTS.advisor_name,
-                company_name: els.company_name.value || DEFAULTS.company_name,
-                agent_id: els.agent_id.value || DEFAULTS.agent_id,
+                firstName: firstName,
+                lastName: lastName,
+                customer_first_name: firstName,
+                name: `${firstName}${lastName ? ' ' + lastName : ''}`,
+                phone_number: phone,
+                email: v(els.email, DEFAULTS.email),
+                property_address: addr,
+                advisor_name: advisorName,
+                company_name: brandName,
+                brand_name: brandName,
+                agent_id: v(els.agent_id, DEFAULTS.agent_id),
+                agent_phone_number_id: v(els.agent_phone_number_id, DEFAULTS.agent_phone_number_id),
+                first_message: `Hi ${firstName}?`,
+                language_spoken: 'en',
+                protocol: 'LISTING_DETECTED',
+                prior_contact: 'false',
+                mortgage_year: '',
+                current_rate: '',
+                months_to_expiry: '',
+                client: { phone: phone },
                 details: {
                     listing_platform: 'Zillow',
                     title: 'Property detected on listing website',
-                    description: `The property at ${els.property_address.value || '742 Evergreen Terrace'} has been detected on a listing website. A voice agent will call the customer to offer mortgage advisory for their next home.`,
+                    description: `The property at ${addr} has been detected on a listing website`,
                 },
             };
         }
@@ -609,7 +654,7 @@
                 }
 
                 markStep(els.softSteps, 0);
-                log(`Custom trigger → LAD (valuation increase for ${payload.customer_first_name})`, 'ok');
+                log(`Custom trigger → LAD (valuation increase for ${payload.firstName})`, 'ok');
 
                 markStep(els.softSteps, 1);
                 log(`SMS → ${payload.phone_number}`, 'ok');
@@ -657,7 +702,7 @@
                 }
 
                 markStep(els.hardSteps, 0);
-                log(`Custom trigger → LAD (listing detected for ${payload.customer_first_name})`, 'ok');
+                log(`Custom trigger → LAD (listing detected for ${payload.firstName})`, 'ok');
 
                 setStatus(els.hardStatus, 'Voice agent call in progress...', 'pending');
                 markStep(els.hardSteps, 1);
@@ -753,7 +798,7 @@
 
         loadConfig();
         updatePayloadPreviews();
-        log('Demo control panel ready — v2 (consistent variable names)', 'info');
+        log('Demo control panel ready — v3 (aligned with ActivePieces flows)', 'info');
     </script>
 </body>
 </html>
