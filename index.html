@@ -581,12 +581,12 @@
             <div class="config-body" id="configBody">
                 <div class="config-grid">
                     <div class="field">
-                        <label for="webhookA">Webhook URL — Soft Signal (Act 2)</label>
-                        <input type="url" id="webhookA" placeholder="https://cloud.activepieces.com/api/v1/webhooks/...">
+                    <label for="webhookA">Webhook URL — Soft Signal (Act 2)</label>
+                    <input type="url" id="webhookA" value="https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF" placeholder="https://pricehubble.activepieces.com/api/v1/webhooks/...">
                     </div>
                     <div class="field">
-                        <label for="webhookB">Webhook URL — Hard Signal (Act 3)</label>
-                        <input type="url" id="webhookB" placeholder="https://cloud.activepieces.com/api/v1/webhooks/...">
+                    <label for="webhookB">Webhook URL — Hard Signal (Act 3)</label>
+                    <input type="url" id="webhookB" value="https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD" placeholder="https://pricehubble.activepieces.com/api/v1/webhooks/...">
                     </div>
                     <div class="field">
                         <label for="apiToken">LAD API Bearer Token</label>
@@ -594,7 +594,7 @@
                     </div>
                     <div class="field">
                         <label for="ladApiUrl">LAD Events API URL</label>
-                        <input type="url" id="ladApiUrl" placeholder="https://api-predev.pricehubble.net/api/v1/leads/events">
+                        <input type="url" id="ladApiUrl" value="https://api-predev.pricehubble.net/api/v1/leads/events" placeholder="https://api-predev.pricehubble.net/api/v1/leads/events">
                     </div>
                 </div>
                 <div class="config-actions">
@@ -640,13 +640,19 @@
 
         // --- Config persistence ---
 
+        const DEFAULTS = {
+            webhookA: 'https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF',
+            webhookB: 'https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD',
+            ladApiUrl: 'https://api-predev.pricehubble.net/api/v1/leads/events',
+        };
+
         function loadConfig() {
             try {
                 const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-                if (data.webhookA) els.webhookA.value = data.webhookA;
-                if (data.webhookB) els.webhookB.value = data.webhookB;
+                els.webhookA.value = data.webhookA || DEFAULTS.webhookA;
+                els.webhookB.value = data.webhookB || DEFAULTS.webhookB;
+                els.ladApiUrl.value = data.ladApiUrl || DEFAULTS.ladApiUrl;
                 if (data.apiToken) els.apiToken.value = data.apiToken;
-                if (data.ladApiUrl) els.ladApiUrl.value = data.ladApiUrl;
                 if (data.leadName) els.leadName.value = data.leadName;
                 if (data.phone) els.phone.value = data.phone;
                 if (data.email) els.email.value = data.email;

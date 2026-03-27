@@ -2,7 +2,7 @@
 
 Backstage trigger UI for the **Signal Autopilot** demo. Used during live walkthroughs to fire lifecycle signals that trigger automated outbound actions in the Lead Activation Dashboard (LAD).
 
-**Live demo:** https://pricehubble.github.io/seed-signal-sell-demo/
+**Live demo:** https://charlesalzon-alt.github.io/slf-1371/
 
 ## What is this?
 
@@ -42,8 +42,8 @@ Act 3: Hard Signal (operator fires from this UI)
 
 | Field | Description |
 |---|---|
-| Webhook URL — Soft Signal | ActivePieces webhook URL for Flow A |
-| Webhook URL — Hard Signal | ActivePieces webhook URL for Flow B |
+| Webhook URL — Soft Signal | `https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF` |
+| Webhook URL — Hard Signal | `https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD` |
 | LAD API Bearer Token | Auth token for `api-predev.pricehubble.net` |
 | LAD Events API URL | `https://api-predev.pricehubble.net/api/v1/leads/events` |
 
