@@ -275,9 +275,13 @@
                     <label for="email">Email <span class="var-hint">→ email</span></label>
                     <input type="email" id="email" value="charles.alzon@pricehubble.com" placeholder="e.g. charles@example.com">
                 </div>
-                <div class="field" style="grid-column: 1 / -1">
-                    <label for="leadId">Lead ID <span class="var-hint">→ leadId (connects triggers & activities to the right lead in LAD)</span></label>
-                    <input type="text" id="leadId" placeholder="Paste the PriceHubble Lead ID here">
+                <div class="field">
+                    <label for="leadId">Lead ID <span class="var-hint">→ leadId</span></label>
+                    <input type="text" id="leadId" placeholder="PriceHubble Lead ID">
+                </div>
+                <div class="field">
+                    <label for="micrositeUrl">Microsite URL <span class="var-hint">→ microsite-url</span></label>
+                    <input type="url" id="micrositeUrl" placeholder="https://dash.pricehubble.com/pb/..." value="">
                 </div>
             </div>
 
@@ -396,7 +400,7 @@
     <div class="saved-toast" id="toast"></div>
 
     <script>
-        const STORAGE_KEY = 'sss-demo-config-v4';
+        const STORAGE_KEY = 'sss-demo-config-v5';
 
         const $ = id => document.getElementById(id);
 
@@ -406,6 +410,7 @@
             phone_number: $('phone_number'),
             email: $('email'),
             leadId: $('leadId'),
+            micrositeUrl: $('micrositeUrl'),
             advisor_name: $('advisor_name'),
             company_name: $('company_name'),
             agent_id: $('agent_id'),
@@ -436,6 +441,7 @@
             phone_number: '+33668706066',
             email: 'charles.alzon@pricehubble.com',
             leadId: '',
+            micrositeUrl: '',
             advisor_name: 'Jasser Kassab',
             company_name: 'Your mortgage company',
             agent_id: 'agent_3401kmqy3rbqff3v7vd6cbjsrqft',
@@ -447,7 +453,7 @@
         // --- Config persistence ---
 
         const PERSIST_FIELDS = [
-            'firstName', 'lastName', 'phone_number', 'email', 'leadId',
+            'firstName', 'lastName', 'phone_number', 'email', 'leadId', 'micrositeUrl',
             'advisor_name', 'company_name', 'agent_id', 'agent_phone_number_id',
             'webhookSoft', 'webhookHard',
         ];
@@ -533,6 +539,7 @@
             return {
                 signal_type: 'valuation_increase',
                 leadId: v(els.leadId, DEFAULTS.leadId),
+                'microsite-url': v(els.micrositeUrl, DEFAULTS.micrositeUrl),
                 firstName: firstName,
                 lastName: lastName,
                 customer_first_name: firstName,
@@ -559,6 +566,7 @@
             return {
                 signal_type: 'listing_detected',
                 leadId: leadId,
+                'microsite-url': v(els.micrositeUrl, DEFAULTS.micrositeUrl),
                 firstName: firstName,
                 lastName: lastName,
                 customer_first_name: firstName,
@@ -770,7 +778,7 @@
 
         loadConfig();
         updatePayloadPreviews();
-        log('Demo control panel ready — v4 (leadId-based, no lead creation)', 'info');
+        log('Demo control panel ready — v5 (leadId + microsite-url)', 'info');
     </script>
 </body>
 </html>
