@@ -373,10 +373,6 @@
                         <label for="webhookHard">Webhook URL — Hard Signal (Act 3)</label>
                         <input type="url" id="webhookHard" value="https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD">
                     </div>
-                    <div class="field">
-                        <label for="apiToken">LAD API Bearer Token</label>
-                        <input type="password" id="apiToken" placeholder="Bearer token for api-predev.pricehubble.net">
-                    </div>
                 </div>
                 <div class="config-actions">
                     <button class="btn-primary-sm" id="saveConfig">Save Configuration</button>
@@ -406,7 +402,6 @@
             agent_id: $('agent_id'),
             webhookSoft: $('webhookSoft'),
             webhookHard: $('webhookHard'),
-            apiToken: $('apiToken'),
             softTrigger: $('softTrigger'),
             hardTrigger: $('hardTrigger'),
             softStatus: $('softStatus'),
@@ -438,7 +433,7 @@
         const PERSIST_FIELDS = [
             'customer_first_name', 'phone_number', 'email', 'property_address',
             'advisor_name', 'company_name', 'agent_id',
-            'webhookSoft', 'webhookHard', 'apiToken',
+            'webhookSoft', 'webhookHard',
         ];
 
         function loadConfig() {
