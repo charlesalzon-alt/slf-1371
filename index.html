@@ -276,8 +276,8 @@
                     <input type="email" id="email" value="charles.alzon@pricehubble.com" placeholder="e.g. charles@example.com">
                 </div>
                 <div class="field" style="grid-column: 1 / -1">
-                    <label for="property_address">Property Address <span class="var-hint">→ property_address</span></label>
-                    <input type="text" id="property_address" value="169 Madison Ave #2484, New York, NY 10016, United States" placeholder="e.g. 169 Madison Ave, New York">
+                    <label for="leadId">Lead ID <span class="var-hint">→ leadId (connects triggers & activities to the right lead in LAD)</span></label>
+                    <input type="text" id="leadId" placeholder="Paste the PriceHubble Lead ID here">
                 </div>
             </div>
 
@@ -396,7 +396,7 @@
     <div class="saved-toast" id="toast"></div>
 
     <script>
-        const STORAGE_KEY = 'sss-demo-config-v3';
+        const STORAGE_KEY = 'sss-demo-config-v4';
 
         const $ = id => document.getElementById(id);
 
@@ -405,7 +405,7 @@
             lastName: $('lastName'),
             phone_number: $('phone_number'),
             email: $('email'),
-            property_address: $('property_address'),
+            leadId: $('leadId'),
             advisor_name: $('advisor_name'),
             company_name: $('company_name'),
             agent_id: $('agent_id'),
@@ -435,7 +435,7 @@
             lastName: '',
             phone_number: '+33668706066',
             email: 'charles.alzon@pricehubble.com',
-            property_address: '169 Madison Ave #2484, New York, NY 10016, United States',
+            leadId: '',
             advisor_name: 'Jasser Kassab',
             company_name: 'Your mortgage company',
             agent_id: 'agent_3401kmqy3rbqff3v7vd6cbjsrqft',
@@ -447,7 +447,7 @@
         // --- Config persistence ---
 
         const PERSIST_FIELDS = [
-            'firstName', 'lastName', 'phone_number', 'email', 'property_address',
+            'firstName', 'lastName', 'phone_number', 'email', 'leadId',
             'advisor_name', 'company_name', 'agent_id', 'agent_phone_number_id',
             'webhookSoft', 'webhookHard',
         ];
@@ -530,23 +530,21 @@
             const firstName = v(els.firstName, DEFAULTS.firstName);
             const lastName = v(els.lastName, DEFAULTS.lastName);
             const phone = v(els.phone_number, DEFAULTS.phone_number);
-            const addr = v(els.property_address, DEFAULTS.property_address);
             return {
                 signal_type: 'valuation_increase',
+                leadId: v(els.leadId, DEFAULTS.leadId),
                 firstName: firstName,
                 lastName: lastName,
                 customer_first_name: firstName,
                 phone_number: phone,
                 email: v(els.email, DEFAULTS.email),
-                property_address: addr,
                 advisor_name: v(els.advisor_name, DEFAULTS.advisor_name),
                 company_name: v(els.company_name, DEFAULTS.company_name),
                 brand_name: v(els.company_name, DEFAULTS.company_name),
-                client: { phone: phone },
                 details: {
                     change_percent: 10,
                     title: 'Property value has strongly increased',
-                    description: `This property value experienced a +10% increase, opening a window for refinancing`,
+                    description: 'This property value experienced a +10% increase, opening a window for refinancing',
                 },
             };
         }
@@ -555,18 +553,18 @@
             const firstName = v(els.firstName, DEFAULTS.firstName);
             const lastName = v(els.lastName, DEFAULTS.lastName);
             const phone = v(els.phone_number, DEFAULTS.phone_number);
-            const addr = v(els.property_address, DEFAULTS.property_address);
+            const leadId = v(els.leadId, DEFAULTS.leadId);
             const advisorName = v(els.advisor_name, DEFAULTS.advisor_name);
             const brandName = v(els.company_name, DEFAULTS.company_name);
             return {
                 signal_type: 'listing_detected',
+                leadId: leadId,
                 firstName: firstName,
                 lastName: lastName,
                 customer_first_name: firstName,
                 name: `${firstName}${lastName ? ' ' + lastName : ''}`,
                 phone_number: phone,
                 email: v(els.email, DEFAULTS.email),
-                property_address: addr,
                 advisor_name: advisorName,
                 company_name: brandName,
                 brand_name: brandName,
@@ -579,11 +577,10 @@
                 mortgage_year: '',
                 current_rate: '',
                 months_to_expiry: '',
-                client: { phone: phone },
                 details: {
                     listing_platform: 'Zillow',
                     title: 'Property detected on listing website',
-                    description: `The property at ${addr} has been detected on a listing website`,
+                    description: 'Property has been detected on a listing website',
                 },
             };
         }
@@ -773,7 +770,7 @@
 
         loadConfig();
         updatePayloadPreviews();
-        log('Demo control panel ready — v3 (aligned with ActivePieces flows)', 'info');
+        log('Demo control panel ready — v4 (leadId-based, no lead creation)', 'info');
     </script>
 </body>
 </html>
