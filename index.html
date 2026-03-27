@@ -736,43 +736,7 @@
             }
         }
 
-        // --- Hold-to-confirm ---
-
-        function setupHoldButton(btn, action) {
-            let holdTimer = null;
-            let holdStart = 0;
-            const HOLD_MS = 800;
-            const progressBar = btn.querySelector('.btn-progress');
-
-            function startHold(e) {
-                if (btn.disabled) return;
-                e.preventDefault();
-                holdStart = Date.now();
-                btn.classList.add('holding');
-                const tick = () => {
-                    const elapsed = Date.now() - holdStart;
-                    const pct = Math.min((elapsed / HOLD_MS) * 100, 100);
-                    progressBar.style.width = pct + '%';
-                    if (elapsed >= HOLD_MS) { cancelHold(); action(); return; }
-                    holdTimer = requestAnimationFrame(tick);
-                };
-                holdTimer = requestAnimationFrame(tick);
-            }
-
-            function cancelHold() {
-                btn.classList.remove('holding');
-                if (holdTimer) cancelAnimationFrame(holdTimer);
-                holdTimer = null;
-                progressBar.style.width = '0%';
-            }
-
-            btn.addEventListener('mousedown', startHold);
-            btn.addEventListener('touchstart', startHold, { passive: false });
-            btn.addEventListener('mouseup', cancelHold);
-            btn.addEventListener('mouseleave', cancelHold);
-            btn.addEventListener('touchend', cancelHold);
-            btn.addEventListener('touchcancel', cancelHold);
-        }
+        // --- Button click handlers ---
 
         // --- Config toggle ---
 
@@ -794,8 +758,8 @@
 
         // --- Event bindings ---
 
-        setupHoldButton(els.softTrigger, fireSoftSignal);
-        setupHoldButton(els.hardTrigger, fireHardSignal);
+        els.softTrigger.addEventListener('click', fireSoftSignal);
+        els.hardTrigger.addEventListener('click', fireHardSignal);
         els.saveConfig.addEventListener('click', saveConfig);
         els.clearConfig.addEventListener('click', clearConfig);
         els.clearLog.addEventListener('click', clearLog);
