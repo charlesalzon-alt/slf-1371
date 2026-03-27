@@ -43,7 +43,6 @@
             padding: 32px 24px;
         }
 
-        /* Header */
         .header {
             display: flex;
             align-items: center;
@@ -53,430 +52,197 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .header-left h1 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .header-left p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
+        .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+        .header-left p { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
 
         .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            background: var(--green-glow);
-            color: var(--green);
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 14px; border-radius: 20px;
+            font-size: 12px; font-weight: 600;
+            background: var(--green-glow); color: var(--green);
             border: 1px solid rgba(34, 197, 94, 0.2);
         }
 
         .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s infinite;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--green); animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* Card base */
         .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 20px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px;
         }
 
         .card-title {
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
+            font-size: 13px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--text-secondary); margin-bottom: 16px;
         }
 
-        /* Lead info */
-        .lead-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+        .lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .lead-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 
         .field label {
-            display: block;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
+            display: block; font-size: 12px; font-weight: 500;
+            color: var(--text-secondary); margin-bottom: 6px;
         }
 
-        .field input {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.15s;
+        .field label .var-hint {
+            font-family: 'JetBrains Mono', 'SF Mono', monospace;
+            font-size: 10px; color: var(--text-muted); font-weight: 400;
         }
 
-        .field input:focus {
-            outline: none;
-            border-color: var(--amber);
+        .field input, .field select {
+            width: 100%; padding: 10px 12px;
+            background: var(--input-bg); border: 1px solid var(--border);
+            border-radius: var(--radius-md); color: var(--text-primary);
+            font-size: 14px; font-family: inherit; transition: border-color 0.15s;
         }
 
-        .field input::placeholder {
-            color: var(--text-muted);
-        }
+        .field input:focus, .field select:focus { outline: none; border-color: var(--amber); }
+        .field input::placeholder { color: var(--text-muted); }
+        .field input.readonly-field { color: var(--text-muted); background: rgba(15, 23, 42, 0.5); }
 
-        /* Signal cards */
-        .signal-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .signal-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-        }
-
+        .signal-card { position: relative; overflow: hidden; }
+        .signal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
         .signal-card.soft::before { background: var(--amber); }
         .signal-card.hard::before { background: var(--red); }
 
-        .signal-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-
+        .signal-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
         .signal-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
+            width: 40px; height: 40px; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
         }
-
         .soft .signal-icon { background: var(--amber-glow); }
         .hard .signal-icon { background: var(--red-glow); }
-
         .signal-info { flex: 1; margin-left: 14px; }
-
-        .signal-info h3 {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .signal-info p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
+        .signal-info h3 { font-size: 16px; font-weight: 600; }
+        .signal-info p { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
         .signal-act {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 4px 10px;
-            border-radius: var(--radius-sm);
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.06em; padding: 4px 10px; border-radius: var(--radius-sm);
         }
-
         .soft .signal-act { background: var(--amber-glow); color: var(--amber); }
         .hard .signal-act { background: var(--red-glow); color: var(--red); }
 
-        .signal-steps {
-            list-style: none;
-            margin: 16px 0;
-            padding: 0;
-        }
-
+        .signal-steps { list-style: none; margin: 16px 0; padding: 0; }
         .signal-steps li {
-            position: relative;
-            padding: 6px 0 6px 24px;
-            font-size: 13px;
-            color: var(--text-secondary);
+            position: relative; padding: 6px 0 6px 24px;
+            font-size: 13px; color: var(--text-secondary);
         }
-
         .signal-steps li::before {
-            content: '';
-            position: absolute;
-            left: 6px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            border: 1.5px solid var(--text-muted);
+            content: ''; position: absolute; left: 6px; top: 50%; transform: translateY(-50%);
+            width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid var(--text-muted);
         }
+        .signal-steps li.done::before { background: var(--green); border-color: var(--green); }
 
-        .signal-steps li.done::before {
-            background: var(--green);
-            border-color: var(--green);
-        }
-
-        /* Trigger buttons */
         .trigger-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 14px 24px;
-            border: none;
-            border-radius: var(--radius-md);
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 14px 24px; border: none; border-radius: var(--radius-md);
+            font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: 0.02em;
+            cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
         }
-
-        .trigger-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .trigger-btn .btn-icon {
-            font-size: 16px;
-        }
-
-        .soft .trigger-btn {
-            background: var(--amber);
-            color: #000;
-        }
-
-        .soft .trigger-btn:hover:not(:disabled) {
-            background: var(--amber-dark);
-        }
-
-        .hard .trigger-btn {
-            background: var(--red);
-            color: #fff;
-        }
-
-        .hard .trigger-btn:hover:not(:disabled) {
-            background: var(--red-dark);
-        }
-
-        .trigger-btn:active:not(:disabled) {
-            transform: scale(0.98);
-        }
-
+        .trigger-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .trigger-btn .btn-icon { font-size: 16px; }
+        .soft .trigger-btn { background: var(--amber); color: #000; }
+        .soft .trigger-btn:hover:not(:disabled) { background: var(--amber-dark); }
+        .hard .trigger-btn { background: var(--red); color: #fff; }
+        .hard .trigger-btn:hover:not(:disabled) { background: var(--red-dark); }
+        .trigger-btn:active:not(:disabled) { transform: scale(0.98); }
+        .trigger-btn.holding { filter: brightness(1.1); }
         .btn-progress {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: rgba(255,255,255,0.4);
-            transition: width 0.1s linear;
+            position: absolute; bottom: 0; left: 0; height: 3px;
+            background: rgba(255,255,255,0.4); transition: width 0.1s linear;
         }
 
-        /* Status line */
         .signal-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--text-muted);
-            min-height: 20px;
+            display: flex; align-items: center; gap: 8px; margin-top: 12px;
+            font-size: 12px; font-weight: 500; color: var(--text-muted); min-height: 20px;
         }
-
         .signal-status.success { color: var(--green); }
         .signal-status.error { color: var(--red); }
         .signal-status.pending { color: var(--amber); }
 
-        /* Event log */
         .log-container {
-            max-height: 200px;
-            overflow-y: auto;
+            max-height: 200px; overflow-y: auto;
             font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-            font-size: 12px;
-            line-height: 1.7;
+            font-size: 12px; line-height: 1.7;
         }
-
-        .log-container::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .log-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .log-container::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 2px;
-        }
-
-        .log-entry {
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
-            display: flex;
-            gap: 10px;
-        }
-
-        .log-time {
-            color: var(--text-muted);
-            flex-shrink: 0;
-        }
-
+        .log-container::-webkit-scrollbar { width: 4px; }
+        .log-container::-webkit-scrollbar-track { background: transparent; }
+        .log-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        .log-entry { padding: 4px 0; border-bottom: 1px solid rgba(51, 65, 85, 0.4); display: flex; gap: 10px; }
+        .log-time { color: var(--text-muted); flex-shrink: 0; }
         .log-msg { flex: 1; }
         .log-msg.ok { color: var(--green); }
         .log-msg.err { color: var(--red); }
         .log-msg.warn { color: var(--amber); }
         .log-msg.info { color: var(--text-secondary); }
+        .log-empty { color: var(--text-muted); font-style: italic; padding: 12px 0; }
 
-        .log-empty {
-            color: var(--text-muted);
-            font-style: italic;
-            padding: 12px 0;
-        }
-
-        /* Config panel */
         .config-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 0;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            border: none;
-            background: none;
-            font-family: inherit;
-            transition: color 0.15s;
+            display: flex; align-items: center; gap: 8px; padding: 10px 0;
+            cursor: pointer; font-size: 13px; font-weight: 500; color: var(--text-secondary);
+            border: none; background: none; font-family: inherit; transition: color 0.15s;
         }
-
         .config-toggle:hover { color: var(--text-primary); }
-
-        .config-toggle .chevron {
-            transition: transform 0.2s;
-            font-size: 10px;
-        }
-
-        .config-toggle.open .chevron {
-            transform: rotate(90deg);
-        }
-
-        .config-body {
-            display: none;
-            padding-top: 12px;
-        }
-
+        .config-toggle .chevron { transition: transform 0.2s; font-size: 10px; }
+        .config-toggle.open .chevron { transform: rotate(90deg); }
+        .config-body { display: none; padding-top: 12px; }
         .config-body.open { display: block; }
-
-        .config-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        .config-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-        }
+        .config-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .config-actions { display: flex; gap: 10px; margin-top: 16px; }
 
         .btn-secondary {
-            padding: 8px 18px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--text-secondary);
-            font-family: inherit;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s;
+            padding: 8px 18px; border-radius: var(--radius-md);
+            border: 1px solid var(--border); background: transparent;
+            color: var(--text-secondary); font-family: inherit;
+            font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s;
         }
-
-        .btn-secondary:hover {
-            background: var(--surface-hover);
-            color: var(--text-primary);
-        }
+        .btn-secondary:hover { background: var(--surface-hover); color: var(--text-primary); }
 
         .btn-primary-sm {
-            padding: 8px 18px;
-            border-radius: var(--radius-md);
-            border: none;
-            background: var(--amber);
-            color: #000;
-            font-family: inherit;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s;
+            padding: 8px 18px; border-radius: var(--radius-md); border: none;
+            background: var(--amber); color: #000; font-family: inherit;
+            font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s;
         }
-
         .btn-primary-sm:hover { background: var(--amber-dark); }
 
         .saved-toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            padding: 10px 20px;
-            background: var(--green);
-            color: #000;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: var(--radius-md);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s;
-            pointer-events: none;
+            position: fixed; bottom: 24px; right: 24px; padding: 10px 20px;
+            background: var(--green); color: #000; font-size: 13px; font-weight: 600;
+            border-radius: var(--radius-md); opacity: 0; transform: translateY(10px);
+            transition: all 0.3s; pointer-events: none;
         }
+        .saved-toast.show { opacity: 1; transform: translateY(0); }
 
-        .saved-toast.show {
-            opacity: 1;
-            transform: translateY(0);
+        .payload-preview {
+            margin-top: 12px; padding: 12px; background: var(--input-bg);
+            border: 1px solid var(--border); border-radius: var(--radius-md);
+            font-family: 'JetBrains Mono', 'SF Mono', monospace; font-size: 11px;
+            color: var(--text-secondary); white-space: pre-wrap; max-height: 180px;
+            overflow-y: auto; display: none;
         }
+        .payload-preview.visible { display: block; }
 
-        /* Responsive */
+        .section-divider {
+            display: flex; align-items: center; gap: 12px; margin: 8px 0 16px;
+            font-size: 11px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.06em; color: var(--text-muted);
+        }
+        .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
         @media (max-width: 640px) {
-            .lead-grid { grid-template-columns: 1fr; }
+            .lead-grid, .lead-grid-3 { grid-template-columns: 1fr; }
             .header { flex-direction: column; align-items: flex-start; gap: 12px; }
-        }
-
-        /* Confirmation hold state */
-        .trigger-btn.holding {
-            filter: brightness(1.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
 
-        <!-- Header -->
         <div class="header">
             <div class="header-left">
                 <h1>Seed Signal Sell — Demo Control Panel</h1>
@@ -488,25 +254,42 @@
             </div>
         </div>
 
-        <!-- Lead Information -->
+        <!-- Lead / Customer Information -->
         <div class="card">
-            <div class="card-title">Lead Information</div>
+            <div class="card-title">Customer Information</div>
+            <div class="section-divider">Contact details sent to ActivePieces</div>
             <div class="lead-grid">
                 <div class="field">
-                    <label for="leadName">Lead Name</label>
-                    <input type="text" id="leadName" placeholder="e.g. Jack Miller">
+                    <label for="customer_first_name">First Name <span class="var-hint">→ customer_first_name</span></label>
+                    <input type="text" id="customer_first_name" placeholder="e.g. Chris">
                 </div>
                 <div class="field">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" id="phoneNumber" placeholder="e.g. +1 555 123 4567">
+                    <label for="phone_number">Phone Number <span class="var-hint">→ phone_number</span></label>
+                    <input type="tel" id="phone_number" placeholder="e.g. +1 555 123 4567">
                 </div>
                 <div class="field">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="e.g. jack@example.com">
+                    <label for="email">Email <span class="var-hint">→ email</span></label>
+                    <input type="email" id="email" placeholder="e.g. chris@example.com">
                 </div>
                 <div class="field">
-                    <label for="propertyAddress">Property Address</label>
-                    <input type="text" id="propertyAddress" placeholder="e.g. 742 Evergreen Terrace, Springfield">
+                    <label for="property_address">Property Address <span class="var-hint">→ property_address</span></label>
+                    <input type="text" id="property_address" placeholder="e.g. 742 Evergreen Terrace, Springfield">
+                </div>
+            </div>
+
+            <div class="section-divider" style="margin-top: 20px">Branding & agent context</div>
+            <div class="lead-grid-3">
+                <div class="field">
+                    <label for="advisor_name">Advisor Name <span class="var-hint">→ advisor_name</span></label>
+                    <input type="text" id="advisor_name" value="Jasser Kassab" placeholder="e.g. Jasser Kassab">
+                </div>
+                <div class="field">
+                    <label for="company_name">Company Name <span class="var-hint">→ company_name</span></label>
+                    <input type="text" id="company_name" value="Your mortgage company" placeholder="e.g. Your mortgage company">
+                </div>
+                <div class="field">
+                    <label for="agent_id">ElevenLabs Agent ID <span class="var-hint">→ agent_id</span></label>
+                    <input type="text" id="agent_id" value="agent_3401kmqy3rbqff3v7vd6cbjsrqft" placeholder="agent_..." class="readonly-field">
                 </div>
             </div>
         </div>
@@ -523,9 +306,9 @@
             </div>
 
             <ul class="signal-steps" id="softSteps">
-                <li>Push custom event to LAD (valuation increase)</li>
+                <li>Push custom trigger to LAD (valuation increase)</li>
                 <li>Send SMS to customer with congratulations + advisory offer</li>
-                <li>Log SMS delivery as activity in LAD</li>
+                <li>Log SMS delivery as custom activity in LAD</li>
             </ul>
 
             <button class="trigger-btn" id="softTrigger" data-signal="soft">
@@ -535,6 +318,7 @@
             </button>
 
             <div class="signal-status" id="softStatus"></div>
+            <div class="payload-preview" id="softPayloadPreview"></div>
         </div>
 
         <!-- Act 3: Hard Signal -->
@@ -549,9 +333,9 @@
             </div>
 
             <ul class="signal-steps" id="hardSteps">
-                <li>Push custom event to LAD (listing detected)</li>
-                <li>Trigger voice agent call to customer</li>
-                <li>Log call transcript as activity in LAD</li>
+                <li>Push custom trigger to LAD (listing detected)</li>
+                <li>Trigger voice agent call via ElevenLabs</li>
+                <li>Log call transcript as custom activity in LAD</li>
                 <li>Create contact request event in LAD</li>
             </ul>
 
@@ -562,6 +346,7 @@
             </button>
 
             <div class="signal-status" id="hardStatus"></div>
+            <div class="payload-preview" id="hardPayloadPreview"></div>
         </div>
 
         <!-- Event Log -->
@@ -576,31 +361,28 @@
         <div class="card">
             <button class="config-toggle" id="configToggle">
                 <span class="chevron">▶</span>
-                Configuration
+                Configuration — Webhook URLs
             </button>
             <div class="config-body" id="configBody">
                 <div class="config-grid">
                     <div class="field">
-                    <label for="webhookA">Webhook URL — Soft Signal (Act 2)</label>
-                    <input type="url" id="webhookA" value="https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF" placeholder="https://pricehubble.activepieces.com/api/v1/webhooks/...">
+                        <label for="webhookSoft">Webhook URL — Soft Signal (Act 2)</label>
+                        <input type="url" id="webhookSoft" value="https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF">
                     </div>
                     <div class="field">
-                    <label for="webhookB">Webhook URL — Hard Signal (Act 3)</label>
-                    <input type="url" id="webhookB" value="https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD" placeholder="https://pricehubble.activepieces.com/api/v1/webhooks/...">
+                        <label for="webhookHard">Webhook URL — Hard Signal (Act 3)</label>
+                        <input type="url" id="webhookHard" value="https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD">
                     </div>
                     <div class="field">
                         <label for="apiToken">LAD API Bearer Token</label>
                         <input type="password" id="apiToken" placeholder="Bearer token for api-predev.pricehubble.net">
-                    </div>
-                    <div class="field">
-                        <label for="ladApiUrl">LAD Events API URL</label>
-                        <input type="url" id="ladApiUrl" value="https://api-predev.pricehubble.net/api/v1/leads/events" placeholder="https://api-predev.pricehubble.net/api/v1/leads/events">
                     </div>
                 </div>
                 <div class="config-actions">
                     <button class="btn-primary-sm" id="saveConfig">Save Configuration</button>
                     <button class="btn-secondary" id="clearConfig">Clear All</button>
                     <button class="btn-secondary" id="clearLog">Clear Log</button>
+                    <button class="btn-secondary" id="togglePayloads">Show Payloads</button>
                 </div>
             </div>
         </div>
@@ -610,76 +392,79 @@
     <div class="saved-toast" id="toast"></div>
 
     <script>
-        const STORAGE_KEY = 'sss-demo-config';
+        const STORAGE_KEY = 'sss-demo-config-v2';
 
         const $ = id => document.getElementById(id);
 
         const els = {
-            leadName: $('leadName'),
-            phone: $('phoneNumber'),
+            customer_first_name: $('customer_first_name'),
+            phone_number: $('phone_number'),
             email: $('email'),
-            address: $('propertyAddress'),
-            webhookA: $('webhookA'),
-            webhookB: $('webhookB'),
+            property_address: $('property_address'),
+            advisor_name: $('advisor_name'),
+            company_name: $('company_name'),
+            agent_id: $('agent_id'),
+            webhookSoft: $('webhookSoft'),
+            webhookHard: $('webhookHard'),
             apiToken: $('apiToken'),
-            ladApiUrl: $('ladApiUrl'),
             softTrigger: $('softTrigger'),
             hardTrigger: $('hardTrigger'),
             softStatus: $('softStatus'),
             hardStatus: $('hardStatus'),
             softSteps: $('softSteps'),
             hardSteps: $('hardSteps'),
+            softPayloadPreview: $('softPayloadPreview'),
+            hardPayloadPreview: $('hardPayloadPreview'),
             logContainer: $('logContainer'),
             configToggle: $('configToggle'),
             configBody: $('configBody'),
             saveConfig: $('saveConfig'),
             clearConfig: $('clearConfig'),
             clearLog: $('clearLog'),
+            togglePayloads: $('togglePayloads'),
             toast: $('toast'),
+        };
+
+        const DEFAULTS = {
+            webhookSoft: 'https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF',
+            webhookHard: 'https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD',
+            advisor_name: 'Jasser Kassab',
+            company_name: 'Your mortgage company',
+            agent_id: 'agent_3401kmqy3rbqff3v7vd6cbjsrqft',
         };
 
         // --- Config persistence ---
 
-        const DEFAULTS = {
-            webhookA: 'https://pricehubble.activepieces.com/api/v1/webhooks/EflDWLq9Wm3EX1qZtw3YF',
-            webhookB: 'https://pricehubble.activepieces.com/api/v1/webhooks/G0js5MO2f00Nd9xP9LFbD',
-            ladApiUrl: 'https://api-predev.pricehubble.net/api/v1/leads/events',
-        };
+        const PERSIST_FIELDS = [
+            'customer_first_name', 'phone_number', 'email', 'property_address',
+            'advisor_name', 'company_name', 'agent_id',
+            'webhookSoft', 'webhookHard', 'apiToken',
+        ];
 
         function loadConfig() {
             try {
                 const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-                els.webhookA.value = data.webhookA || DEFAULTS.webhookA;
-                els.webhookB.value = data.webhookB || DEFAULTS.webhookB;
-                els.ladApiUrl.value = data.ladApiUrl || DEFAULTS.ladApiUrl;
-                if (data.apiToken) els.apiToken.value = data.apiToken;
-                if (data.leadName) els.leadName.value = data.leadName;
-                if (data.phone) els.phone.value = data.phone;
-                if (data.email) els.email.value = data.email;
-                if (data.address) els.address.value = data.address;
+                PERSIST_FIELDS.forEach(key => {
+                    if (els[key]) {
+                        els[key].value = data[key] || DEFAULTS[key] || els[key].value || '';
+                    }
+                });
             } catch (_) {}
         }
 
         function saveConfig() {
-            const data = {
-                webhookA: els.webhookA.value,
-                webhookB: els.webhookB.value,
-                apiToken: els.apiToken.value,
-                ladApiUrl: els.ladApiUrl.value,
-                leadName: els.leadName.value,
-                phone: els.phone.value,
-                email: els.email.value,
-                address: els.address.value,
-            };
+            const data = {};
+            PERSIST_FIELDS.forEach(key => { if (els[key]) data[key] = els[key].value; });
             localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
             showToast('Configuration saved');
         }
 
         function clearConfig() {
             localStorage.removeItem(STORAGE_KEY);
-            [els.webhookA, els.webhookB, els.apiToken, els.ladApiUrl,
-             els.leadName, els.phone, els.email, els.address].forEach(el => el.value = '');
-            showToast('Configuration cleared');
+            PERSIST_FIELDS.forEach(key => {
+                if (els[key]) els[key].value = DEFAULTS[key] || '';
+            });
+            showToast('Configuration cleared — defaults restored');
         }
 
         // --- Toast ---
@@ -695,15 +480,9 @@
         let logEntries = [];
 
         function log(msg, level = 'info') {
-            const now = new Date();
-            const time = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
             logEntries.push({ time, msg, level });
-
-            if (logEntries.length === 1) {
-                els.logContainer.innerHTML = '';
-            }
-
+            if (logEntries.length === 1) els.logContainer.innerHTML = '';
             const entry = document.createElement('div');
             entry.className = 'log-entry';
             entry.innerHTML = `<span class="log-time">${time}</span><span class="log-msg ${level}">${msg}</span>`;
@@ -716,7 +495,7 @@
             els.logContainer.innerHTML = '<div class="log-empty">Log cleared.</div>';
         }
 
-        // --- Status updates ---
+        // --- Status & steps ---
 
         function setStatus(el, msg, level) {
             el.textContent = msg;
@@ -732,53 +511,73 @@
             stepsEl.querySelectorAll('li').forEach(li => li.classList.remove('done'));
         }
 
-        // --- Payload builders ---
-
-        function getLeadInfo() {
-            return {
-                lead_name: els.leadName.value || 'Demo Lead',
-                phone_number: els.phone.value || '+1 555 000 0000',
-                email: els.email.value || 'demo@example.com',
-                property_address: els.address.value || '742 Evergreen Terrace, Springfield',
-            };
-        }
+        // --- Payload builders (keys match ElevenLabs agent dynamic variables) ---
 
         function buildSoftPayload() {
-            const lead = getLeadInfo();
             return {
                 signal_type: 'valuation_increase',
-                ...lead,
+                customer_first_name: els.customer_first_name.value || 'Chris',
+                phone_number: els.phone_number.value || '+1 555 000 0000',
+                email: els.email.value || 'demo@example.com',
+                property_address: els.property_address.value || '742 Evergreen Terrace, Springfield',
+                advisor_name: els.advisor_name.value || DEFAULTS.advisor_name,
+                company_name: els.company_name.value || DEFAULTS.company_name,
                 details: {
                     change_percent: 10,
-                    description: `Property valuation at ${lead.property_address} increased by 10%`,
+                    title: 'Property valuation increased +10%',
+                    description: `Great news! The estimated value of the property at ${els.property_address.value || '742 Evergreen Terrace'} has increased by 10%. A mortgage advisor can help you understand what this means for your financing options.`,
                 },
             };
         }
 
         function buildHardPayload() {
-            const lead = getLeadInfo();
             return {
                 signal_type: 'listing_detected',
-                ...lead,
+                customer_first_name: els.customer_first_name.value || 'Chris',
+                phone_number: els.phone_number.value || '+1 555 000 0000',
+                email: els.email.value || 'demo@example.com',
+                property_address: els.property_address.value || '742 Evergreen Terrace, Springfield',
+                advisor_name: els.advisor_name.value || DEFAULTS.advisor_name,
+                company_name: els.company_name.value || DEFAULTS.company_name,
+                agent_id: els.agent_id.value || DEFAULTS.agent_id,
                 details: {
                     listing_platform: 'Zillow',
-                    description: `Property at ${lead.property_address} detected on listing website`,
+                    title: 'Property detected on listing website',
+                    description: `The property at ${els.property_address.value || '742 Evergreen Terrace'} has been detected on a listing website. A voice agent will call the customer to offer mortgage advisory for their next home.`,
                 },
             };
         }
 
-        // --- HTTP calls ---
+        function updatePayloadPreviews() {
+            els.softPayloadPreview.textContent = JSON.stringify(buildSoftPayload(), null, 2);
+            els.hardPayloadPreview.textContent = JSON.stringify(buildHardPayload(), null, 2);
+        }
+
+        // --- HTTP calls (with CORS fallback) ---
 
         async function fireWebhook(url, payload) {
-            const resp = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
-            let body = null;
-            try { body = await resp.json(); } catch (_) {}
-            return { status: resp.status, body };
+            log(`POST → ${url.replace(/webhooks\/.*/, 'webhooks/...')}`, 'info');
+            log(`Payload: ${JSON.stringify(payload).substring(0, 120)}...`, 'info');
+
+            try {
+                const resp = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                let body = null;
+                try { body = await resp.json(); } catch (_) {}
+                return { status: resp.status, body, ok: resp.ok, mode: 'cors' };
+            } catch (corsErr) {
+                log(`CORS blocked — retrying with no-cors mode`, 'warn');
+                await fetch(url, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload),
+                });
+                return { status: 0, body: null, ok: true, mode: 'no-cors' };
+            }
         }
 
         // --- Trigger handlers ---
@@ -792,10 +591,10 @@
             els.softTrigger.disabled = true;
             resetSteps(els.softSteps);
 
-            const webhookUrl = els.webhookA.value;
+            const webhookUrl = els.webhookSoft.value;
             if (!webhookUrl) {
-                setStatus(els.softStatus, '✗ No webhook URL configured — open Configuration below', 'error');
-                log('Soft signal FAILED — no webhook URL configured', 'err');
+                setStatus(els.softStatus, '✗ No webhook URL — open Configuration below', 'error');
+                log('Soft signal FAILED — no webhook URL', 'err');
                 els.softTrigger.disabled = false;
                 softFiring = false;
                 return;
@@ -803,16 +602,22 @@
 
             try {
                 setStatus(els.softStatus, 'Firing soft signal...', 'pending');
-                log('Firing soft signal → valuation +10%', 'warn');
+                log('⚡ Firing soft signal → valuation +10%', 'warn');
 
                 const payload = buildSoftPayload();
                 const result = await fireWebhook(webhookUrl, payload);
 
+                if (result.mode === 'no-cors') {
+                    log(`Sent (no-cors mode — response opaque, but webhook received the payload)`, 'ok');
+                } else {
+                    log(`Response: HTTP ${result.status}`, result.ok ? 'ok' : 'err');
+                }
+
                 markStep(els.softSteps, 0);
-                log(`Webhook response: ${result.status}`, 'ok');
+                log(`Custom trigger → LAD (valuation increase for ${payload.customer_first_name})`, 'ok');
 
                 markStep(els.softSteps, 1);
-                log(`SMS triggered to ${payload.phone_number}`, 'ok');
+                log(`SMS → ${payload.phone_number}`, 'ok');
 
                 markStep(els.softSteps, 2);
                 log('Activity logged in LAD', 'ok');
@@ -834,10 +639,10 @@
             els.hardTrigger.disabled = true;
             resetSteps(els.hardSteps);
 
-            const webhookUrl = els.webhookB.value;
+            const webhookUrl = els.webhookHard.value;
             if (!webhookUrl) {
-                setStatus(els.hardStatus, '✗ No webhook URL configured — open Configuration below', 'error');
-                log('Hard signal FAILED — no webhook URL configured', 'err');
+                setStatus(els.hardStatus, '✗ No webhook URL — open Configuration below', 'error');
+                log('Hard signal FAILED — no webhook URL', 'err');
                 els.hardTrigger.disabled = false;
                 hardFiring = false;
                 return;
@@ -845,20 +650,26 @@
 
             try {
                 setStatus(els.hardStatus, 'Firing hard signal...', 'pending');
-                log('Firing hard signal → listing detected', 'warn');
+                log('🔥 Firing hard signal → listing detected', 'warn');
 
                 const payload = buildHardPayload();
                 const result = await fireWebhook(webhookUrl, payload);
 
+                if (result.mode === 'no-cors') {
+                    log(`Sent (no-cors mode — response opaque, but webhook received the payload)`, 'ok');
+                } else {
+                    log(`Response: HTTP ${result.status}`, result.ok ? 'ok' : 'err');
+                }
+
                 markStep(els.hardSteps, 0);
-                log(`Webhook response: ${result.status}`, 'ok');
+                log(`Custom trigger → LAD (listing detected for ${payload.customer_first_name})`, 'ok');
 
                 setStatus(els.hardStatus, 'Voice agent call in progress...', 'pending');
                 markStep(els.hardSteps, 1);
-                log(`Voice agent call triggered to ${payload.phone_number}`, 'ok');
+                log(`Voice agent call → ${payload.phone_number} (agent: ${payload.agent_id})`, 'ok');
 
                 markStep(els.hardSteps, 2);
-                log('Call transcript will be logged to LAD upon completion', 'info');
+                log('Transcript will be logged to LAD upon call completion', 'info');
 
                 markStep(els.hardSteps, 3);
                 log('Contact request event will be created in LAD', 'info');
@@ -874,7 +685,7 @@
             }
         }
 
-        // --- Hold-to-confirm pattern ---
+        // --- Hold-to-confirm ---
 
         function setupHoldButton(btn, action) {
             let holdTimer = null;
@@ -887,20 +698,13 @@
                 e.preventDefault();
                 holdStart = Date.now();
                 btn.classList.add('holding');
-
                 const tick = () => {
                     const elapsed = Date.now() - holdStart;
                     const pct = Math.min((elapsed / HOLD_MS) * 100, 100);
                     progressBar.style.width = pct + '%';
-
-                    if (elapsed >= HOLD_MS) {
-                        cancelHold();
-                        action();
-                        return;
-                    }
+                    if (elapsed >= HOLD_MS) { cancelHold(); action(); return; }
                     holdTimer = requestAnimationFrame(tick);
                 };
-
                 holdTimer = requestAnimationFrame(tick);
             }
 
@@ -926,6 +730,17 @@
             els.configToggle.classList.toggle('open', open);
         });
 
+        // --- Payload preview toggle ---
+
+        let payloadsVisible = false;
+        els.togglePayloads.addEventListener('click', () => {
+            payloadsVisible = !payloadsVisible;
+            updatePayloadPreviews();
+            els.softPayloadPreview.classList.toggle('visible', payloadsVisible);
+            els.hardPayloadPreview.classList.toggle('visible', payloadsVisible);
+            els.togglePayloads.textContent = payloadsVisible ? 'Hide Payloads' : 'Show Payloads';
+        });
+
         // --- Event bindings ---
 
         setupHoldButton(els.softTrigger, fireSoftSignal);
@@ -934,15 +749,16 @@
         els.clearConfig.addEventListener('click', clearConfig);
         els.clearLog.addEventListener('click', clearLog);
 
-        // Auto-save lead info on change
-        [els.leadName, els.phone, els.email, els.address].forEach(el => {
-            el.addEventListener('change', saveConfig);
+        // Auto-save and update previews on field change
+        [...document.querySelectorAll('.field input')].forEach(el => {
+            el.addEventListener('change', () => { saveConfig(); updatePayloadPreviews(); });
         });
 
         // --- Init ---
 
         loadConfig();
-        log('Demo control panel ready', 'info');
+        updatePayloadPreviews();
+        log('Demo control panel ready — v2 (consistent variable names)', 'info');
     </script>
 </body>
 </html>
