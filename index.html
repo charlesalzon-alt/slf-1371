@@ -369,7 +369,7 @@
         <div class="card">
             <button class="config-toggle" id="configToggle">
                 <span class="chevron">▶</span>
-                Configuration — Webhook URLs
+                Configuration — Webhooks & Auth
             </button>
             <div class="config-body" id="configBody">
                 <div class="config-grid">
@@ -384,6 +384,14 @@
                     <div class="field">
                         <label for="agent_phone_number_id">ElevenLabs Agent Phone Number ID <span class="var-hint">(for outbound calls)</span></label>
                         <input type="text" id="agent_phone_number_id" value="phnum_3001kcp38r5je6hs64x2v2gpqe6f" placeholder="From ElevenLabs phone numbers config">
+                    </div>
+                    <div class="field">
+                        <label for="phUsername">PH API Username <span class="var-hint">→ username</span></label>
+                        <input type="text" id="phUsername" value="acme_us_charles" placeholder="PriceHubble API username">
+                    </div>
+                    <div class="field">
+                        <label for="phPassword">PH API Password <span class="var-hint">→ password</span></label>
+                        <input type="password" id="phPassword" value="acm3_u5!" placeholder="PriceHubble API password">
                     </div>
                 </div>
                 <div class="config-actions">
@@ -400,7 +408,7 @@
     <div class="saved-toast" id="toast"></div>
 
     <script>
-        const STORAGE_KEY = 'sss-demo-config-v5';
+        const STORAGE_KEY = 'sss-demo-config-v6';
 
         const $ = id => document.getElementById(id);
 
@@ -415,6 +423,8 @@
             company_name: $('company_name'),
             agent_id: $('agent_id'),
             agent_phone_number_id: $('agent_phone_number_id'),
+            phUsername: $('phUsername'),
+            phPassword: $('phPassword'),
             webhookSoft: $('webhookSoft'),
             webhookHard: $('webhookHard'),
             softTrigger: $('softTrigger'),
@@ -446,6 +456,8 @@
             company_name: 'Your mortgage company',
             agent_id: 'agent_3401kmqy3rbqff3v7vd6cbjsrqft',
             agent_phone_number_id: 'phnum_3001kcp38r5je6hs64x2v2gpqe6f',
+            phUsername: 'acme_us_charles',
+            phPassword: 'acm3_u5!',
             webhookSoft: 'https://pricehubble.activepieces.com/api/v1/webhooks/Pvk1HHOSIql9SOxPp3WR2/sync',
             webhookHard: 'https://pricehubble.activepieces.com/api/v1/webhooks/fHTx4YlBhVtkTi7coD8TP/sync',
         };
@@ -455,7 +467,7 @@
         const PERSIST_FIELDS = [
             'firstName', 'lastName', 'phone_number', 'email', 'leadId', 'micrositeUrl',
             'advisor_name', 'company_name', 'agent_id', 'agent_phone_number_id',
-            'webhookSoft', 'webhookHard',
+            'phUsername', 'phPassword', 'webhookSoft', 'webhookHard',
         ];
 
         function loadConfig() {
@@ -540,6 +552,8 @@
                 signal_type: 'valuation_increase',
                 leadId: v(els.leadId, DEFAULTS.leadId),
                 'microsite-url': v(els.micrositeUrl, DEFAULTS.micrositeUrl),
+                username: v(els.phUsername, DEFAULTS.phUsername),
+                password: v(els.phPassword, DEFAULTS.phPassword),
                 firstName: firstName,
                 lastName: lastName,
                 customer_first_name: firstName,
@@ -567,6 +581,8 @@
                 signal_type: 'listing_detected',
                 leadId: leadId,
                 'microsite-url': v(els.micrositeUrl, DEFAULTS.micrositeUrl),
+                username: v(els.phUsername, DEFAULTS.phUsername),
+                password: v(els.phPassword, DEFAULTS.phPassword),
                 firstName: firstName,
                 lastName: lastName,
                 customer_first_name: firstName,
@@ -778,7 +794,7 @@
 
         loadConfig();
         updatePayloadPreviews();
-        log('Demo control panel ready — v5 (leadId + microsite-url)', 'info');
+        log('Demo control panel ready — v6 (leadId + microsite-url + auth)', 'info');
     </script>
 </body>
 </html>
